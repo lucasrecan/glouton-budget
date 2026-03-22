@@ -1,5 +1,5 @@
-# Mini-Projet : [Nom de l'Application]
-*Projet réalisé dans le cadre du module [Nom du Module].*
+# Mini-Projet Flutter
+*Projet réalisé dans le cadre du module R4.A.11.*
 
 > **IMPORTANT :** Merci de remplir la fiche d'identification ci-dessous sans modifier les libellés de la colonne "Donnée".
 > **NE PAS MODIFIER** la structure du tableau au-dessus de la ligne de séparation.
@@ -9,8 +9,8 @@
 
 | Donnée              | Valeur                     |
 |:--------------------|:---------------------------|
-| **Numéro d'équipe** | [Num équipe]               |
 | **Application**     | [Nom de l'application ici] |
+| **Numéro d'équipe** | [Num équipe]               |
 | **Identifiant 1**   | [abc1234a]                 |
 | **Identifiant 2**   | [def5678b]                 |
 
