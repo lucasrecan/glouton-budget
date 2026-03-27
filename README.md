@@ -7,12 +7,12 @@
 
 ## 📋 Fiche d'identification
 
-| Donnée              | Valeur                     |
-|:--------------------|:---------------------------|
-| **Application**     | [Nom de l'application ici] |
-| **Numéro d'équipe** | [10]                       |
-| **Identifiant 1**   | [shn4606a]                 |
-| **Identifiant 2**   | [rcl4463a]                 |
+| Donnée              | Valeur           |
+|:--------------------|:-----------------|
+| **Application**     | [Glouton Budget] |
+| **Numéro d'équipe** | [10]             |
+| **Identifiant 1**   | [shn4606a]       |
+| **Identifiant 2**   | [rcl4463a]       |
 
 
 ---
