@@ -16,6 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'Glouton Budget',
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6B3FA0),
+        ),
+      ),
     );
   }
 }
@@ -42,8 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF5F0FF),
+
       appBar: AppBar(
         title: const Text("Glouton Budget"),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 1,
       ),
 
       drawer: Drawer(
@@ -116,7 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
               // TOTAL
               Text(
                 "${total.toStringAsFixed(2)} €",
-                style: const TextStyle(fontSize: 42),
+                style: const TextStyle(
+                  fontSize: 48,
+                  fontWeight: FontWeight.w300,
+                  color: Color(0xFF2D2D2D)),
               ),
 
               const SizedBox(height: 20),
@@ -124,6 +137,11 @@ class _HomeScreenState extends State<HomeScreen> {
               // DROPDOWN
               DropdownButton<String>(
                 value: periode,
+                underline: Container(),
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
                 items: const [
                   DropdownMenuItem(value: "Cette semaine", child: Text("Cette semaine")),
                   DropdownMenuItem(value: "Ce mois", child: Text("Ce mois")),
@@ -144,6 +162,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6B3FA0),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
                     onPressed: ajouterRepas,
                     child: const Text("Ajouter un repas"),
                   ),
@@ -184,10 +210,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.purple,
+        selectedItemColor: const Color(0xFF6B3FA0),
         unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
+        backgroundColor: Colors.white,
+        elevation: 10,
+
+          onTap: (index) {
           setState(() {
             selectedIndex = index;
           });
