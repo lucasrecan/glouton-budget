@@ -18,6 +18,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  String periode = "Cette semaine";
+  double total = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,9 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              const Text(
-                "0,00 €",
-                style: TextStyle(
+              Text(
+                "${total.toStringAsFixed(2)} €",
+                style: const TextStyle(
                   fontSize: 42,
                   fontWeight: FontWeight.w500,
                 ),
@@ -106,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 20),
 
               DropdownButton<String>(
-                value: "Cette semaine",
+                value: periode,
                 underline: Container(),
                 items: const [
                   DropdownMenuItem(value: "Cette semaine", child: Text("Cette semaine")),
@@ -114,7 +117,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   DropdownMenuItem(value: "Cette année", child: Text("Cette année")),
                   DropdownMenuItem(value: "Tout", child: Text("Tout")),
                 ],
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    periode = value!;
+                  });
+                },
               ),
 
               const SizedBox(height: 30),
