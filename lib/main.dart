@@ -28,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
+  int selectedIndex = 0; // la navigation de navigation bar
   double total = 0.0;
   String periode = "Cette semaine";
   bool estBoursier = false;
@@ -180,6 +180,59 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+      ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        selectedItemColor: Colors.purple,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AjouterDepense()),
+            );
+          }
+
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Historique(),
+              ),
+            );
+          }
+
+          if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Parametres()),
+            );
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Menu",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle_outline),
+            label: "Ajouter",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: "Historique",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Paramètres",
+          ),
+        ],
       ),
     );
   }
