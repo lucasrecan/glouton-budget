@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             ListTile(
-              leading: const Icon(Icons.add),
+              leading: const Icon(Icons.add_circle_outline),
               title: const Text("Ajouter dépense"),
               onTap: () {
                 Navigator.push(
@@ -155,8 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         SnackBar(
                           content: Text(
                             estBoursier
-                                ? "Repas Crous : 1€ (boursier)"
-                                : "Repas Crous : 3.30€ (non boursier)",
+                                ? "Repas CROUS : 1€ (boursier)"
+                                : "Repas CROUS : 3.30€ (non boursier)",
                           ),
                         ),
                       );
