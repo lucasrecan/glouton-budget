@@ -45,13 +45,25 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                 const SizedBox(height: 30),
 
                 // TITRE
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Titre",
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Titre",
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                   ),
                 ),
@@ -59,14 +71,26 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                 const SizedBox(height: 20),
 
                 // DESCRIPTION
-                TextField(
-                  maxLines: 4,
-                  decoration: InputDecoration(
-                    labelText: "Description",
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: TextField(
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                      labelText: "Description",
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                   ),
                 ),
@@ -114,6 +138,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         selectedItemColor: const Color(0xFF6B3FA0),
+        showUnselectedLabels: false,
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         elevation: 10,
