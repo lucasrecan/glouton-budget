@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'ajoute_depense.dart';
-import 'historique.dart';
-import 'parametres.dart';
+import 'widgets/ajoute_depense.dart';
+import 'widgets/historique.dart';
+import 'widgets/parametres.dart';
 
 void main() {
   runApp(const MyApp());
