@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'depense.dart';
 
-class IMCModel extends ChangeNotifier {
+class DepenseModel extends ChangeNotifier {
   final List<Depense> _historique = [];
 
   List<Depense> get historique => _historique;

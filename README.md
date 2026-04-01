@@ -18,7 +18,7 @@
 ---
 
 ## 📝 Description du Projet
-[Insérez ici une courte description de votre application (3-5 lignes). Expliquez son but, ses fonctionnalités principales et son public cible.]
+Glouton Budget est une application permettant aux étudiants de suivre facilement leurs dépenses quotidiennes. Elle propose un ajout rapide des repas (tarif boursier ou non boursier) ainsi que la possibilité d’enregistrer des dépenses personnalisées. L’utilisateur peut consulter un historique de ses dépenses et gérer ses préférences via un écran de paramètres. L’application vise un usage simple, rapide et intuitif, adapté à la vie étudiante.
 
 ---
 
