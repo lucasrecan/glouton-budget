@@ -41,18 +41,31 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0; // la navigation de navigation bar
-  double total = 0.0;
   String periode = "Cette semaine";
   bool estBoursier = false;
 
   void ajouterRepas() {
-    setState(() {
-      total += estBoursier ? 1.0 : 3.30;
-    });
+    double prix = estBoursier ? 1.0 : 3.30;
+
+    context.read<DepenseModel>().ajouterDepense(
+      titre: "Repas",
+      description: estBoursier
+          ? "Repas CROUS (boursier)"
+          : "Repas CROUS (non boursier)",
+      montant: prix,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<DepenseModel>();
+    final depenses = model.historique;
+
+    double totalCalcule = depenses.fold(
+      0,
+      (sum, item) => sum + item.montant,
+    );
+
     return Scaffold(
       backgroundColor: const Color(0xFFF5F0FF),
 
@@ -130,9 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              // TOTAL
+              // TOTAL (utilise Provider)
               Text(
-                "${total.toStringAsFixed(2)} €",
+                "${totalCalcule.toStringAsFixed(2)} €",
                 style: const TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.w300,
