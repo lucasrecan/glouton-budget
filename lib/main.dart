@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'models/depense_model.dart';
+import 'models/preferences_provider.dart';
 import 'widgets/ajoute_depense.dart';
 import 'widgets/historique.dart';
 import 'widgets/parametres.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => DepenseModel(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => DepenseModel()),
+        ChangeNotifierProvider(create: (_) => PreferencesProvider()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -60,6 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final model = context.watch<DepenseModel>();
     final depenses = model.historique;
+    final prefs = context.watch<PreferencesProvider>();
+    bool estBoursier = prefs.isBoursier;
+
 
     double totalCalcule = depenses.fold(
       0,

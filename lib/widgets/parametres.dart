@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/preferences_provider.dart';
 
 /*
 Paramètres intéressants :
@@ -44,7 +47,8 @@ class _ParametresState extends State<Parametres> {
     setState(() {
       _isBoursier = prefs.getBool('isBoursier') ?? false;
       _isDarkMode = prefs.getBool('isDarkMode') ?? true;
-      _selectedColor = prefs.getInt('selectedColor') ?? Colors.purple.toARGB32();
+      _selectedColor =
+          prefs.getInt('selectedColor') ?? Colors.purple.toARGB32();
       _selectedLanguage = prefs.getString('selectedLanguage') ?? 'fr';
     });
   }
@@ -63,7 +67,6 @@ class _ParametresState extends State<Parametres> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,16 +78,13 @@ class _ParametresState extends State<Parametres> {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-
           // 1. Mode sombre (Switch)
           SwitchListTile(
             title: const Text("Mode Sombre"),
             subtitle: const Text("Activer le thème sombre"),
-            value: _isDarkMode,
+            value: context.watch<PreferencesProvider>().isDarkMode,
             onChanged: (value) {
-              setState(() {
-                _isDarkMode = value;
-              });;
+              context.read<PreferencesProvider>().setDarkMode(value);
             },
           ),
           const Divider(),
@@ -96,22 +96,18 @@ class _ParametresState extends State<Parametres> {
               children: [
                 Radio<bool>(
                   value: true,
-                  groupValue: _isBoursier,
+                  groupValue: context.watch<PreferencesProvider>().isBoursier,
                   onChanged: (value) {
-                    setState(() {
-                      _isBoursier = value!;
-                    });;
+                    context.read<PreferencesProvider>().setBoursier(value!);
                   },
                 ),
                 const Text("Boursier"),
                 const SizedBox(width: 20),
                 Radio<bool>(
                   value: false,
-                  groupValue: _isBoursier,
+                  groupValue: context.watch<PreferencesProvider>().isBoursier,
                   onChanged: (value) {
-                    setState(() {
-                      _isBoursier = value!;
-                    });
+                    context.read<PreferencesProvider>().setBoursier(value!);
                   },
                 ),
                 const Text("Non boursier"),
@@ -119,21 +115,18 @@ class _ParametresState extends State<Parametres> {
             ),
           ),
           const Divider(), // barre horizontal de séparation
-
           // 3. Langue (Dropdown Menu)
           ListTile(
             title: const Text("Langue de l'application"),
             trailing: DropdownButton<String>(
-              value: _selectedLanguage,
+              value: context.watch<PreferencesProvider>().selectedLanguage,
               items: const [
                 DropdownMenuItem(value: 'fr', child: Text("Français")),
                 DropdownMenuItem(value: 'en', child: Text("English")),
               ],
               onChanged: (String? newValue) {
                 if (newValue != null) {
-                  setState(() {
-                    _selectedLanguage = newValue;
-                  });
+                  context.read<PreferencesProvider>().setSelectedLanguage(newValue);
                 }
               },
             ),
@@ -148,12 +141,10 @@ class _ParametresState extends State<Parametres> {
               child: Wrap(
                 spacing: 12,
                 children: _availableColors.map((color) {
-                  final isSelected = _selectedColor == color.toARGB32();
+                  final isSelected = context.watch<PreferencesProvider>().selectedColor == color.toARGB32();
                   return GestureDetector(
                     onTap: () {
-                      setState(() {
-                        _selectedColor = color.toARGB32();
-                      });
+                      context.read<PreferencesProvider>().setSelectedColor(color.toARGB32());
                     },
                     child: Container(
                       width: 40,
@@ -162,7 +153,9 @@ class _ParametresState extends State<Parametres> {
                         color: color,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: isSelected ? Colors.black87 : Colors.transparent,
+                          color: isSelected
+                              ? Colors.black87
+                              : Colors.transparent,
                           width: 3,
                         ),
                       ),
