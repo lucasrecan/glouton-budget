@@ -232,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: selectedIndex,
         selectedItemColor: const Color(0xFF6B3FA0),
         unselectedItemColor: Colors.grey,
+        showUnselectedLabels: false,
         backgroundColor: Colors.white,
         elevation: 10,
 
@@ -241,14 +242,14 @@ class _HomeScreenState extends State<HomeScreen> {
           });
 
           if (index == 1) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const AjouterDepense()),
             );
           }
 
           if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const Historique(),
@@ -257,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           if (index == 3) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const Parametres()),
             );
