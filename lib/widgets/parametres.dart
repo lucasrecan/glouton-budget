@@ -25,7 +25,6 @@ class _ParametresState extends State<Parametres> {
   bool _isDarkMode = true;
   int _selectedColor = Colors.purple.toARGB32();
   String _selectedLanguage = 'fr';
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   // Liste de couleurs proposées pour l'application
   final List<Color> _availableColors = [
@@ -39,36 +38,15 @@ class _ParametresState extends State<Parametres> {
   @override
   void initState() {
     super.initState();
-    _loadPreferences();
-  }
 
-  Future<void> _loadPreferences() async {
-    final SharedPreferences prefs = await _prefs;
-    setState(() {
-      _isBoursier = prefs.getBool('isBoursier') ?? false;
-      _isDarkMode = prefs.getBool('isDarkMode') ?? true;
-      _selectedColor =
-          prefs.getInt('selectedColor') ?? Colors.purple.toARGB32();
-      _selectedLanguage = prefs.getString('selectedLanguage') ?? 'fr';
-    });
-  }
-
-  Future<void> _savePreferences() async {
-    final SharedPreferences prefs = await _prefs;
-    await prefs.setBool('isBoursier', _isBoursier);
-    await prefs.setBool('isDarkMode', _isDarkMode);
-    await prefs.setInt('selectedColor', _selectedColor);
-    await prefs.setString('selectedLanguage', _selectedLanguage);
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Préférences enregistrées !')),
-      );
-    }
   }
 
   @override
   Widget build(BuildContext context) {
+    _isBoursier = context.watch<PreferencesProvider>().isBoursier;
+    _isDarkMode = context.watch<PreferencesProvider>().isDarkMode;
+    _selectedColor = context.watch<PreferencesProvider>().selectedColor;
+    _selectedLanguage = context.watch<PreferencesProvider>().selectedLanguage;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Paramètres"),
@@ -78,7 +56,7 @@ class _ParametresState extends State<Parametres> {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          // 1. Mode sombre (Switch)
+          // Mode sombre (Switch)
           SwitchListTile(
             title: const Text("Mode Sombre"),
             subtitle: const Text("Activer le thème sombre"),
@@ -89,7 +67,7 @@ class _ParametresState extends State<Parametres> {
           ),
           const Divider(),
 
-          // 2. Statut Boursier (Radio Buttons)
+          // Statut Boursier (Radio Buttons)
           ListTile(
             title: const Text("Statut étudiant"),
             subtitle: Row(
@@ -115,7 +93,7 @@ class _ParametresState extends State<Parametres> {
             ),
           ),
           const Divider(), // barre horizontal de séparation
-          // 3. Langue (Dropdown Menu)
+          // Langue (Dropdown Menu)
           ListTile(
             title: const Text("Langue de l'application"),
             trailing: DropdownButton<String>(
@@ -133,7 +111,7 @@ class _ParametresState extends State<Parametres> {
           ),
           const Divider(),
 
-          // 4. Couleur principale (Cercles sélectionnables)
+          // Couleur principale (Cercles sélectionnables)
           ListTile(
             title: const Text("Couleur principale"),
             subtitle: Padding(
@@ -165,15 +143,15 @@ class _ParametresState extends State<Parametres> {
               ),
             ),
           ),
-          const SizedBox(height: 30),
-          ElevatedButton.icon(
-            onPressed: _savePreferences,
-            icon: const Icon(Icons.save),
-            label: const Text("Enregistrer les modifications"),
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size.fromHeight(50), // Bouton large
-            ),
-          ),
+          // const SizedBox(height: 30),
+          // ElevatedButton.icon(
+          //   onPressed: _savePreferences,
+          //   icon: const Icon(Icons.save),
+          //   label: const Text("Enregistrer les modifications"),
+          //   style: ElevatedButton.styleFrom(
+          //     minimumSize: const Size.fromHeight(50), // Bouton large
+          //   ),
+          // ),
         ],
       ),
     );

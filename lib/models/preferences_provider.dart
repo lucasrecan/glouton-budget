@@ -21,7 +21,7 @@ class PreferencesProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _isBoursier = prefs.getBool('isBoursier') ?? false;
     _isDarkMode = prefs.getBool('isDarkMode') ?? true;
-    _selectedColor = prefs.getInt('selectedColor') ?? Colors.purple.value;
+    _selectedColor = prefs.getInt('selectedColor') ?? Colors.purple.toARGB32();
     _selectedLanguage = prefs.getString('selectedLanguage') ?? 'fr';
     notifyListeners();
   }

@@ -23,13 +23,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = context.watch<PreferencesProvider>().isDarkMode;
+    final int selectedColor = context
+        .watch<PreferencesProvider>()
+        .selectedColor;
     return MaterialApp(
       title: 'Glouton Budget',
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
-      theme: ThemeData(
+      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      // Thème sombre
+      darkTheme: ThemeData(
+        useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6B3FA0),
+          seedColor: Color(selectedColor),
+          brightness: Brightness.dark,
+        ),
+      ),
+      // Thème clair
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(selectedColor),
+          brightness: Brightness.light,
         ),
       ),
     );
@@ -46,14 +62,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0; // la navigation de navigation bar
   String periode = "Cette semaine";
-  bool estBoursier = false;
 
   void ajouterRepas() {
-    double prix = estBoursier ? 1.0 : 3.30;
+    final bool isBoursier = context.watch<PreferencesProvider>().isBoursier;
+    double prix = isBoursier ? 1.0 : 3.30;
 
     context.read<DepenseModel>().ajouterDepense(
       titre: "Repas",
-      description: estBoursier
+      description: isBoursier
           ? "Repas CROUS (boursier)"
           : "Repas CROUS (non boursier)",
       montant: prix,
@@ -64,22 +80,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final model = context.watch<DepenseModel>();
     final depenses = model.historique;
-    final prefs = context.watch<PreferencesProvider>();
-    bool estBoursier = prefs.isBoursier;
+    final bool isBoursier = context.watch<PreferencesProvider>().isBoursier;
 
-
-    double totalCalcule = depenses.fold(
-      0,
-      (sum, item) => sum + item.montant,
-    );
+    double totalCalcule = depenses.fold(0, (sum, item) => sum + item.montant);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F0FF),
 
       appBar: AppBar(
         title: const Text("Glouton Budget"),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
         elevation: 1,
       ),
 
@@ -87,10 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-
             const DrawerHeader(
               decoration: BoxDecoration(color: Colors.purple),
-              child: Text("Menu", style: TextStyle(color: Colors.white, fontSize: 24)),
+              child: Text(
+                "Menu",
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
             ),
 
             ListTile(
@@ -107,7 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AjouterDepense()),
+                  MaterialPageRoute(
+                    builder: (context) => const AjouterDepense(),
+                  ),
                 );
               },
             ),
@@ -131,12 +143,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(builder: (context) => const Parametres()),
                 );
-
-                if (result != null) {
-                  setState(() {
-                    estBoursier = result;
-                  });
-                }
               },
             ),
           ],
@@ -149,14 +155,14 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               // TOTAL (utilise Provider)
               Text(
                 "${totalCalcule.toStringAsFixed(2)} €",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.w300,
-                  color: Color(0xFF2D2D2D)),
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
 
               const SizedBox(height: 20),
@@ -165,14 +171,17 @@ class _HomeScreenState extends State<HomeScreen> {
               DropdownButton<String>(
                 value: periode,
                 underline: Container(),
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: const TextStyle(color: Colors.black, fontSize: 16),
                 items: const [
-                  DropdownMenuItem(value: "Cette semaine", child: Text("Cette semaine")),
+                  DropdownMenuItem(
+                    value: "Cette semaine",
+                    child: Text("Cette semaine"),
+                  ),
                   DropdownMenuItem(value: "Ce mois", child: Text("Ce mois")),
-                  DropdownMenuItem(value: "Cette année", child: Text("Cette année")),
+                  DropdownMenuItem(
+                    value: "Cette année",
+                    child: Text("Cette année"),
+                  ),
                   DropdownMenuItem(value: "Tout", child: Text("Tout")),
                 ],
                 onChanged: (value) {
@@ -192,7 +201,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF6B3FA0),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 12,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -207,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            estBoursier
+                            isBoursier
                                 ? "Repas CROUS : 1€ (boursier)"
                                 : "Repas CROUS : 3.30€ (non boursier)",
                           ),
@@ -225,7 +237,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AjouterDepense()),
+                    MaterialPageRoute(
+                      builder: (context) => const AjouterDepense(),
+                    ),
                   );
                 },
                 child: const Text("Dépense personnalisée"),
@@ -243,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         elevation: 10,
 
-          onTap: (index) {
+        onTap: (index) {
           setState(() {
             selectedIndex = index;
           });
@@ -258,9 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (context) => const Historique(),
-              ),
+              MaterialPageRoute(builder: (context) => const Historique()),
             );
           }
 
@@ -272,10 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Menu",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Menu"),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle_outline),
             label: "Ajouter",
