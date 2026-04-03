@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_projet_equipen/widgets/barre_navigation.dart';
 import 'package:provider/provider.dart';
 import 'models/depense_model.dart';
 import 'models/preferences_provider.dart';
@@ -249,56 +250,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
+      bottomNavigationBar: BarreNavigation(
+        selectedIndex: selectedIndex,
         selectedItemColor: const Color(0xFF6B3FA0),
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: false,
         backgroundColor: Colors.white,
         elevation: 10,
-
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-
-          if (index == 1) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const AjouterDepense()),
-            );
-          }
-
-          if (index == 2) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Historique()),
-            );
-          }
-
-          if (index == 3) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Parametres()),
-            );
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Menu"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            label: "Ajouter",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: "Historique",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Paramètres",
-          ),
-        ],
-      ),
+      )
     );
   }
 }

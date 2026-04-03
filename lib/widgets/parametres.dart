@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/preferences_provider.dart';
+import 'barre_navigation.dart';
 
 /*
 Paramètres intéressants :
@@ -25,6 +26,7 @@ class _ParametresState extends State<Parametres> {
   bool _isDarkMode = true;
   int _selectedColor = Colors.purple.toARGB32();
   String _selectedLanguage = 'fr';
+  int selectedIndex = 3;
 
   // Liste de couleurs proposées pour l'application
   final List<Color> _availableColors = [
@@ -38,7 +40,6 @@ class _ParametresState extends State<Parametres> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -104,7 +105,9 @@ class _ParametresState extends State<Parametres> {
               ],
               onChanged: (String? newValue) {
                 if (newValue != null) {
-                  context.read<PreferencesProvider>().setSelectedLanguage(newValue);
+                  context.read<PreferencesProvider>().setSelectedLanguage(
+                    newValue,
+                  );
                 }
               },
             ),
@@ -119,10 +122,14 @@ class _ParametresState extends State<Parametres> {
               child: Wrap(
                 spacing: 12,
                 children: _availableColors.map((color) {
-                  final isSelected = context.watch<PreferencesProvider>().selectedColor == color.toARGB32();
+                  final isSelected =
+                      context.watch<PreferencesProvider>().selectedColor ==
+                      color.toARGB32();
                   return GestureDetector(
                     onTap: () {
-                      context.read<PreferencesProvider>().setSelectedColor(color.toARGB32());
+                      context.read<PreferencesProvider>().setSelectedColor(
+                        color.toARGB32(),
+                      );
                     },
                     child: Container(
                       width: 40,
@@ -153,6 +160,14 @@ class _ParametresState extends State<Parametres> {
           //   ),
           // ),
         ],
+      ),
+      bottomNavigationBar: BarreNavigation(
+        selectedIndex: selectedIndex,
+        selectedItemColor: const Color(0xFF6B3FA0),
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: false,
+        backgroundColor: Colors.white,
+        elevation: 10,
       ),
     );
   }
