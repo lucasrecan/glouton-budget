@@ -63,11 +63,11 @@ class _AjouterDepenseState extends State<AjouterDepense> {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F0FF),
       appBar: AppBar(
-        title: const Text("Glouton Budget"),
+        title: const Text("Ajouter une dépense"),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 1,
-        centerTitle: true,
+        centerTitle: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
