@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/depense_model.dart';
 import 'barre_navigation.dart';
+import 'historique.dart';
 
 class AjouterDepense extends StatefulWidget {
   const AjouterDepense({super.key});
@@ -27,7 +28,9 @@ class _AjouterDepenseState extends State<AjouterDepense> {
   void _validerDepense() {
     final String titre = _titreController.text.trim();
     final String description = _descriptionController.text.trim();
-    final double? montant = double.tryParse(_montantController.text);
+    
+    final String montantText = _montantController.text.replaceAll(',', '.');
+    final double? montant = double.tryParse(montantText);
 
     if (titre.isEmpty || montant == null || montant <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -36,17 +39,14 @@ class _AjouterDepenseState extends State<AjouterDepense> {
       return;
     }
 
-    // Unfocus keyboard
     FocusScope.of(context).unfocus();
 
-    // Add expense via Provider
     context.read<DepenseModel>().ajouterDepense(
           titre: titre,
           description: description,
           montant: montant,
         );
 
-    // Clear fields
     _titreController.clear();
     _descriptionController.clear();
     _montantController.clear();
@@ -55,7 +55,6 @@ class _AjouterDepenseState extends State<AjouterDepense> {
       const SnackBar(content: Text("Dépense ajoutée avec succès !")),
     );
 
-    // Retour à l'écran précédent (Home)
     Navigator.pop(context);
   }
 
@@ -64,116 +63,137 @@ class _AjouterDepenseState extends State<AjouterDepense> {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F0FF),
       appBar: AppBar(
-        title: const Text("Ajouter une dépense"),
+        title: const Text("Glouton Budget"),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 1,
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.history),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Historique()),
+              );
+            },
+          ),
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IntrinsicWidth(
+                      child: TextField(
+                        controller: _montantController,
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 80,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
+                        decoration: const InputDecoration(
+                          hintText: "0,00",
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    const Text(
+                      "€",
+                      style: TextStyle(
+                        fontSize: 80,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 40),
 
                 // TITRE
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    controller: _titreController,
-                    decoration: InputDecoration(
-                      labelText: "Titre",
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Titre",
+                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _titreController,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        hintText: "Titre",
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(color: Colors.black38),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
 
-                const SizedBox(height: 20),
-
-                // MONTANT
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    controller: _montantController,
-                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                    decoration: InputDecoration(
-                      labelText: "Montant (€)",
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
 
                 // DESCRIPTION
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    controller: _descriptionController,
-                    maxLines: 3,
-                    decoration: InputDecoration(
-                      labelText: "Description (Optionnelle)",
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Description :",
+                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _descriptionController,
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        hintText: "Mettre un description ici...",
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: const BorderSide(color: Colors.black38),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 30),
 
                 // IMAGE BUTTON
                 OutlinedButton.icon(
                   onPressed: () {
-                    // TODO: Implémenter la sélection d'image
+                    // TODO: Implémenter
                   },
-                  icon: const Icon(Icons.image),
+                  icon: const Icon(Icons.add_photo_alternate_outlined),
                   label: const Text("Ajouter une image"),
                   style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    side: const BorderSide(color: Colors.black87),
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    side: const BorderSide(color: Colors.black54),
                   ),
                 ),
 
@@ -182,17 +202,18 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                 // AJOUTER BUTTON
                 ElevatedButton.icon(
                   onPressed: _validerDepense,
-                  icon: const Icon(Icons.check),
-                  label: const Text("Valider la dépense"),
+                  icon: const Icon(Icons.edit, size: 20),
+                  label: const Text("Ajouter", style: TextStyle(fontSize: 18)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6B3FA0),
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -203,8 +224,8 @@ class _AjouterDepenseState extends State<AjouterDepense> {
         selectedItemColor: const Color(0xFF6B3FA0),
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: false,
-        backgroundColor: Colors.white,
-        elevation: 10,
+        backgroundColor: const Color(0xFFF5F0FF),
+        elevation: 0,
       ),
     );
   }
