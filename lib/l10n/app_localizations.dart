@@ -101,11 +101,191 @@ abstract class AppLocalizations {
   /// **'Glutton Budget'**
   String get appTitle;
 
+  /// No description provided for @menu.
+  ///
+  /// In en, this message translates to:
+  /// **'Menu'**
+  String get menu;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @addDepense.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Expense'**
+  String get addDepense;
+
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get thisWeek;
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get thisMonth;
+
+  /// No description provided for @thisYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This year'**
+  String get thisYear;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
   /// No description provided for @addMeal.
   ///
   /// In en, this message translates to:
   /// **'Add a meal'**
   String get addMeal;
+
+  /// No description provided for @customDepense.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom expense'**
+  String get customDepense;
+
+  /// No description provided for @infoBoursier.
+  ///
+  /// In en, this message translates to:
+  /// **'CROUS Meal: 1€ (scholarship)'**
+  String get infoBoursier;
+
+  /// No description provided for @infoNonBoursier.
+  ///
+  /// In en, this message translates to:
+  /// **'CROUS Meal: 3.30€ (no scholarship)'**
+  String get infoNonBoursier;
+
+  /// No description provided for @noDepenses.
+  ///
+  /// In en, this message translates to:
+  /// **'No expenses yet'**
+  String get noDepenses;
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @amountHint.
+  ///
+  /// In en, this message translates to:
+  /// **'0.00'**
+  String get amountHint;
+
+  /// No description provided for @descriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a description here...'**
+  String get descriptionHint;
+
+  /// No description provided for @addImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an image'**
+  String get addImage;
+
+  /// No description provided for @validateAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get validateAdd;
+
+  /// No description provided for @errorFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid title and amount'**
+  String get errorFields;
+
+  /// No description provided for @successAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense added successfully!'**
+  String get successAdd;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// No description provided for @enableDarkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable dark theme'**
+  String get enableDarkMode;
+
+  /// No description provided for @studentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Student status'**
+  String get studentStatus;
+
+  /// No description provided for @boursier.
+  ///
+  /// In en, this message translates to:
+  /// **'Scholarship'**
+  String get boursier;
+
+  /// No description provided for @nonBoursier.
+  ///
+  /// In en, this message translates to:
+  /// **'No scholarship'**
+  String get nonBoursier;
+
+  /// No description provided for @appLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'App language'**
+  String get appLanguage;
+
+  /// No description provided for @mainColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Main color'**
+  String get mainColor;
+
+  /// No description provided for @repasCrousBoursier.
+  ///
+  /// In en, this message translates to:
+  /// **'CROUS Meal (scholarship)'**
+  String get repasCrousBoursier;
+
+  /// No description provided for @repasCrousNonBoursier.
+  ///
+  /// In en, this message translates to:
+  /// **'CROUS Meal (no scholarship)'**
+  String get repasCrousNonBoursier;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
