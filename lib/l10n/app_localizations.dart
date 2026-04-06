@@ -298,6 +298,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get languageLabel;
+
+  /// No description provided for @navigationMenu.
+  ///
+  /// In en, this message translates to:
+  /// **'Menu'**
+  String get navigationMenu;
+
+  /// No description provided for @navigationAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get navigationAdd;
+
+  /// No description provided for @navigationHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get navigationHistory;
+
+  /// No description provided for @navigationSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get navigationSettings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

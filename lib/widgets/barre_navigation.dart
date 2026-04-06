@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'parametres.dart';
 import 'ajoute_depense.dart';
 import 'historique.dart';
@@ -59,19 +60,19 @@ class _BarreNavigationState extends State<BarreNavigation> {
           );
         }
       },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Menu"),
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: AppLocalizations.of(context)!.navigationMenu),
         BottomNavigationBarItem(
           icon: Icon(Icons.add_circle_outline),
-          label: "Ajouter",
+          label: AppLocalizations.of(context)!.navigationAdd,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.history),
-          label: "Historique",
+          label: AppLocalizations.of(context)!.navigationHistory,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          label: "Paramètres",
+          label: AppLocalizations.of(context)!.navigationSettings,
         ),
       ],
     );

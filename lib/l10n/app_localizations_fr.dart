@@ -109,4 +109,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get languageLabel => 'Langue';
+
+  @override
+  String get navigationMenu => 'Menu';
+
+  @override
+  String get navigationAdd => 'Ajouter';
+
+  @override
+  String get navigationHistory => 'Historique';
+
+  @override
+  String get navigationSettings => 'Paramètres';
 }

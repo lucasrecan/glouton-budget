@@ -33,5 +33,9 @@
   "darkModeLabel": "Dark mode",
   "darkModeSubtitle": "Enable dark mode",
   "colorLabel": "App color",
-  "languageLabel": "Language"
+  "languageLabel": "Language",
+  "navigationMenu": "Menu",
+  "navigationAdd": "Add",
+  "navigationHistory": "History",
+  "navigationSettings": "Settings"
 }
