@@ -24,5 +24,44 @@ Glouton Budget est une application permettant aux étudiants de suivre facilemen
 
 ## 🚀 Guide de démarrage / Informations utiles
 
-Ecrivez ici tout ce qui peut être utile à la compilation ou au lancement de l'application.
-Commandes spécifiques, comptes de test (login/mdp), etc.
+### 📱 Lancement de l’application
+
+1. Cloner le projet ou télécharger les fichiers.
+2. Ouvrir le projet avec **Android Studio** ou **Visual Studio Code**.
+3. Installer les dépendances avec la commande suivante :
+
+   ```bash
+   flutter pub get
+   ```
+4. Lancer un émulateur Android ou connecter un appareil physique.
+5. Exécuter l’application avec :
+
+   ```bash
+   flutter run
+   ```
+
+---
+
+### ⚙️ Informations techniques
+
+* Application développée avec **Flutter** et **Dart**.
+* Gestion de l’état avec **Provider**.
+* Sauvegarde des données (dépenses et préférences) avec **SharedPreferences**.
+* Aucune connexion internet n’est requise.
+
+---
+
+### 🧪 Utilisation
+
+* Ajouter une dépense via le bouton **"Ajouter"** ou **"Ajouter un repas"**.
+* Consulter les dépenses dans l’onglet **Historique**.
+* Supprimer une dépense en effectuant un **glissement (swipe)**.
+* Modifier les paramètres (thème, statut boursier) dans l’onglet **Paramètres**.
+
+---
+
+### 🔐 Comptes de test
+
+* Aucun compte ou authentification n’est nécessaire pour utiliser l’application.
+
+
