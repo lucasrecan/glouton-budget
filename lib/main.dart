@@ -83,7 +83,20 @@ class _HomeScreenState extends State<HomeScreen> {
     final depenses = model.historique;
     final bool isBoursier = context.watch<PreferencesProvider>().isBoursier;
 
-    double totalCalcule = depenses.fold(0, (sum, item) => sum + item.montant);
+    final now = DateTime.now();
+    final filtered = depenses.where((d) {
+      if (periode == "Cette semaine") {
+        return d.date.isAfter(now.subtract(const Duration(days: 7)));
+      } else if (periode == "Ce mois") {
+        return d.date.month == now.month && d.date.year == now.year;
+      } else if (periode == "Cette année") {
+        return d.date.year == now.year;
+      }
+      return true; // "Tout"
+    }).toList();
+
+    double totalCalcule = filtered.fold(0, (sum, d) => sum + d.montant);
+
 
     return Scaffold(
 
