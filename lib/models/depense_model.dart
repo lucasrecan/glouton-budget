@@ -40,13 +40,13 @@ class DepenseModel extends ChangeNotifier {
       montant: montant,
       date: date ?? DateTime.now(),
     ));
-    await _saveToPrefs();
     notifyListeners();
+    await _saveToPrefs();
   }
 
   Future<void> supprimerDepense(int index) async {
     _historique.removeAt(index);
-    await _saveToPrefs();
     notifyListeners();
+    await _saveToPrefs();
   }
 }

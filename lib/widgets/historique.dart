@@ -21,10 +21,11 @@ class Historique extends StatelessWidget {
                 final depense = depenses[index];
 
                 return Dismissible(
-                  key: Key(depense.toString()),
-                  onDismissed: (_) {
+                  key: ValueKey(depense),
+                  onDismissed: (direction) {
                     context.read<DepenseModel>().supprimerDepense(index);
                   },
+
                   background: Container(color: Colors.red),
                   child: ListTile(
                     leading: const Icon(Icons.receipt),
