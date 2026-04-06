@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/depense_model.dart';
+import '../models/depense_provider.dart';
 import 'barre_navigation.dart';
 
 class Historique extends StatelessWidget {
@@ -8,7 +8,7 @@ class Historique extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final depenses = context.watch<DepenseModel>().historique;
+    final depenses = context.watch<DepenseProvider>().historique;
     int selectedIndex = 2;
     return Scaffold(
       appBar: AppBar(title: const Text("Historique")),
@@ -23,7 +23,7 @@ class Historique extends StatelessWidget {
                 return Dismissible(
                   key: Key(depense.toString()),
                   onDismissed: (_) {
-                    context.read<DepenseModel>().supprimerDepense(index);
+                    context.read<DepenseProvider>().supprimerDepense(index);
                   },
                   background: Container(color: Colors.red),
                   child: ListTile(

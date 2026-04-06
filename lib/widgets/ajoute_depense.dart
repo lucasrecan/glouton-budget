@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/depense_model.dart';
+import '../models/depense_provider.dart';
 import 'barre_navigation.dart';
 import 'historique.dart';
 
@@ -41,7 +41,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
 
     FocusScope.of(context).unfocus();
 
-    context.read<DepenseModel>().ajouterDepense(
+    context.read<DepenseProvider>().ajouterDepense(
       titre: titre,
       description: description,
       montant: montant,

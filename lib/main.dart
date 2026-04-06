@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_projet_equipen/widgets/barre_navigation.dart';
 import 'package:provider/provider.dart';
 import 'l10n/app_localizations.dart';
-import 'models/depense_model.dart';
+import 'models/depense_provider.dart';
 import 'models/preferences_provider.dart';
 import 'widgets/ajoute_depense.dart';
 import 'widgets/historique.dart';
@@ -12,7 +12,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => DepenseModel()),
+        ChangeNotifierProvider(create: (_) => DepenseProvider()),
         ChangeNotifierProvider(create: (_) => PreferencesProvider()),
       ],
       child: const MyApp(),
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final bool isBoursier = context.read<PreferencesProvider>().isBoursier;
     double prix = isBoursier ? 1.0 : 3.30;
 
-    context.read<DepenseModel>().ajouterDepense(
+    context.read<DepenseProvider>().ajouterDepense(
       titre: "Repas",
       description: isBoursier
           ? AppLocalizations.of(context)!.repasCrousBoursier
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<DepenseModel>();
+    final model = context.watch<DepenseProvider>();
     final depenses = model.historique;
     final bool isBoursier = context.watch<PreferencesProvider>().isBoursier;
 

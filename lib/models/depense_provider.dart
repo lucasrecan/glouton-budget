@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'depense.dart';
 
-class DepenseModel extends ChangeNotifier {
+class DepenseProvider extends ChangeNotifier {
   List<Depense> _historique = [];
 
   List<Depense> get historique => _historique;
 
-  DepenseModel() {
+  DepenseProvider() {
     _loadFromPrefs();
   }
 
