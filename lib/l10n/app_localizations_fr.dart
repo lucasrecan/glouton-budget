@@ -15,7 +15,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get menu => 'Menu';
 
   @override
-  String get home => 'Menu';
+  String get home => 'Accueil';
 
   @override
   String get addDepense => 'Ajouter dépense';
@@ -42,25 +42,37 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addMeal => 'Ajouter un repas';
 
   @override
-  String get customDepense => 'Dépense personnalisée';
-
-  @override
   String get infoBoursier => 'Repas CROUS : 1€ (boursier)';
 
   @override
   String get infoNonBoursier => 'Repas CROUS : 3.30€ (non boursier)';
 
   @override
-  String get noDepenses => 'Aucune dépense pour le moment';
+  String get customDepense => 'Dépense personnalisée';
 
   @override
-  String get title => 'Titre';
+  String get repasCrousBoursier => 'Repas CROUS (boursier)';
 
   @override
-  String get description => 'Description';
+  String get repasCrousNonBoursier => 'Repas CROUS (non boursier)';
 
   @override
-  String get amountHint => '0,00';
+  String get addDepenseTitle => 'Ajouter une dépense';
+
+  @override
+  String get errorInvalidInput => 'Veuillez entrer un titre et un montant valide';
+
+  @override
+  String get successDepenseAdded => 'Dépense ajoutée avec succès !';
+
+  @override
+  String get titreLabel => 'Titre';
+
+  @override
+  String get titreHint => 'Titre';
+
+  @override
+  String get descriptionLabel => 'Description :';
 
   @override
   String get descriptionHint => 'Mettre une description ici...';
@@ -69,38 +81,32 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addImage => 'Ajouter une image';
 
   @override
-  String get validateAdd => 'Ajouter';
+  String get addBtn => 'Ajouter';
 
   @override
-  String get errorFields => 'Veuillez entrer un titre et un montant valide';
+  String get noExpenses => 'Aucune dépense pour le moment';
 
   @override
-  String get successAdd => 'Dépense ajoutée avec succès !';
+  String get settingsTitle => 'Paramètres';
 
   @override
-  String get darkMode => 'Mode Sombre';
+  String get boursierLabel => 'Boursier';
 
   @override
-  String get enableDarkMode => 'Activer le thème sombre';
+  String get isBoursier => 'Boursier';
 
   @override
-  String get studentStatus => 'Statut étudiant';
+  String get isNotBoursier => 'Non boursier';
 
   @override
-  String get boursier => 'Boursier';
+  String get darkModeLabel => 'Mode sombre';
 
   @override
-  String get nonBoursier => 'Non boursier';
+  String get darkModeSubtitle => 'Activer le mode sombre';
 
   @override
-  String get appLanguage => 'Langue de l\'application';
+  String get colorLabel => 'Couleur de l\'application';
 
   @override
-  String get mainColor => 'Couleur principale';
-
-  @override
-  String get repasCrousBoursier => 'Repas CROUS (boursier)';
-
-  @override
-  String get repasCrousNonBoursier => 'Repas CROUS (non boursier)';
+  String get languageLabel => 'Langue';
 }

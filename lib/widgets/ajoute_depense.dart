@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/depense_provider.dart';
 import 'barre_navigation.dart';
 import 'historique.dart';
@@ -34,7 +35,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
 
     if (titre.isEmpty || montant == null || montant <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Veuillez entrer un titre et un montant valide")),
+        SnackBar(content: Text(AppLocalizations.of(context)!.errorInvalidInput)),
       );
       return;
     }
@@ -52,23 +53,18 @@ class _AjouterDepenseState extends State<AjouterDepense> {
     _montantController.clear();
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Dépense ajoutée avec succès !")),
+      SnackBar(content: Text(AppLocalizations.of(context)!.successDepenseAdded)),
     );
-
-    // Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    // On récupère le thème actuel pour l'utiliser partout dans le build
     final theme = Theme.of(context);
 
     return Scaffold(
-      // Utilise la couleur de fond définie par le thème (sombre ou clair)
       backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
-        title: const Text("Ajouter une dépense"),
-        // Utilise les couleurs du thème au lieu de blanc/noir fixe
+        title: Text(AppLocalizations.of(context)!.addDepenseTitle),
         backgroundColor: theme.colorScheme.surface,
         foregroundColor: theme.colorScheme.onSurface,
         elevation: 1,
@@ -106,7 +102,6 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                         style: TextStyle(
                           fontSize: 80,
                           fontWeight: FontWeight.w400,
-                          // Le texte s'adapte à la surface (blanc sur noir, noir sur blanc)
                           color: theme.colorScheme.onSurface,
                         ),
                         decoration: InputDecoration(
@@ -137,7 +132,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Titre",
+                      AppLocalizations.of(context)!.titreLabel,
                       style: TextStyle(fontSize: 16, color: theme.colorScheme.onSurface),
                     ),
                     const SizedBox(height: 8),
@@ -146,9 +141,8 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                       textInputAction: TextInputAction.next,
                       style: TextStyle(color: theme.colorScheme.onSurface),
                       decoration: InputDecoration(
-                        hintText: "Titre",
+                        hintText: AppLocalizations.of(context)!.titreHint,
                         filled: true,
-                        // Couleur d'arrière-plan du champ adaptative
                         fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.5),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         border: OutlineInputBorder(
@@ -167,7 +161,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Description :",
+                      AppLocalizations.of(context)!.descriptionLabel,
                       style: TextStyle(fontSize: 16, color: theme.colorScheme.onSurface),
                     ),
                     const SizedBox(height: 8),
@@ -176,7 +170,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                       maxLines: 4,
                       style: TextStyle(color: theme.colorScheme.onSurface),
                       decoration: InputDecoration(
-                        hintText: "Mettre un description ici...",
+                        hintText: AppLocalizations.of(context)!.descriptionHint,
                         filled: true,
                         fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.5),
                         border: OutlineInputBorder(
@@ -196,7 +190,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                     // TODO: Implémenter
                   },
                   icon: const Icon(Icons.add_photo_alternate_outlined),
-                  label: const Text("Ajouter une image"),
+                  label: Text(AppLocalizations.of(context)!.addImage),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: theme.colorScheme.onSurface,
                     side: BorderSide(color: theme.colorScheme.onSurface),
@@ -213,9 +207,8 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                 ElevatedButton.icon(
                   onPressed: _validerDepense,
                   icon: const Icon(Icons.edit, size: 20),
-                  label: const Text("Ajouter", style: TextStyle(fontSize: 18)),
+                  label: Text(AppLocalizations.of(context)!.addBtn, style: const TextStyle(fontSize: 18)),
                   style: ElevatedButton.styleFrom(
-                    // Utilise la couleur principale choisie dans les réglages
                     backgroundColor: theme.colorScheme.primary,
                     foregroundColor: theme.colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
@@ -232,7 +225,6 @@ class _AjouterDepenseState extends State<AjouterDepense> {
       ),
       bottomNavigationBar: BarreNavigation(
         selectedIndex: selectedIndex,
-        // On passe les couleurs du thème à la barre de navigation
         selectedItemColor: theme.colorScheme.primary,
         unselectedItemColor: theme.colorScheme.onSurfaceVariant,
         showUnselectedLabels: false,

@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home => 'Home';
 
   @override
-  String get addDepense => 'Add Expense';
+  String get addDepense => 'Add expense';
 
   @override
   String get history => 'History';
@@ -42,25 +42,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addMeal => 'Add a meal';
 
   @override
-  String get customDepense => 'Custom expense';
-
-  @override
   String get infoBoursier => 'CROUS Meal: 1€ (scholarship)';
 
   @override
-  String get infoNonBoursier => 'CROUS Meal: 3.30€ (no scholarship)';
+  String get infoNonBoursier => 'CROUS Meal: 3.30€ (non-scholarship)';
 
   @override
-  String get noDepenses => 'No expenses yet';
+  String get customDepense => 'Custom expense';
 
   @override
-  String get title => 'Title';
+  String get repasCrousBoursier => 'CROUS Meal (scholarship)';
 
   @override
-  String get description => 'Description';
+  String get repasCrousNonBoursier => 'CROUS Meal (non-scholarship)';
 
   @override
-  String get amountHint => '0.00';
+  String get addDepenseTitle => 'Add an expense';
+
+  @override
+  String get errorInvalidInput => 'Please enter a valid title and amount';
+
+  @override
+  String get successDepenseAdded => 'Expense added successfully!';
+
+  @override
+  String get titreLabel => 'Title';
+
+  @override
+  String get titreHint => 'Title';
+
+  @override
+  String get descriptionLabel => 'Description:';
 
   @override
   String get descriptionHint => 'Enter a description here...';
@@ -69,38 +81,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addImage => 'Add an image';
 
   @override
-  String get validateAdd => 'Add';
+  String get addBtn => 'Add';
 
   @override
-  String get errorFields => 'Please enter a valid title and amount';
+  String get noExpenses => 'No expenses yet';
 
   @override
-  String get successAdd => 'Expense added successfully!';
+  String get settingsTitle => 'Settings';
 
   @override
-  String get darkMode => 'Dark Mode';
+  String get boursierLabel => 'Scholarship holder';
 
   @override
-  String get enableDarkMode => 'Enable dark theme';
+  String get isBoursier => 'Scholarship';
 
   @override
-  String get studentStatus => 'Student status';
+  String get isNotBoursier => 'No scholarship';
 
   @override
-  String get boursier => 'Scholarship';
+  String get darkModeLabel => 'Dark mode';
 
   @override
-  String get nonBoursier => 'No scholarship';
+  String get darkModeSubtitle => 'Enable dark mode';
 
   @override
-  String get appLanguage => 'App language';
+  String get colorLabel => 'App color';
 
   @override
-  String get mainColor => 'Main color';
-
-  @override
-  String get repasCrousBoursier => 'CROUS Meal (scholarship)';
-
-  @override
-  String get repasCrousNonBoursier => 'CROUS Meal (no scholarship)';
+  String get languageLabel => 'Language';
 }

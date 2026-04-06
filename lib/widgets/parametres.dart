@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/preferences_provider.dart';
 import 'barre_navigation.dart';
 
@@ -49,7 +50,8 @@ class _ParametresState extends State<Parametres> {
     _selectedLanguage = context.watch<PreferencesProvider>().selectedLanguage;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Paramètres"),
+        title: Text(AppLocalizations.of(context)!.settingsTitle),
+        elevation: 1,
         backgroundColor: Color(_selectedColor),
         foregroundColor: Colors.white,
       ),
@@ -58,8 +60,8 @@ class _ParametresState extends State<Parametres> {
         children: [
           // Mode sombre (Switch)
           SwitchListTile(
-            title: const Text("Mode Sombre"),
-            subtitle: const Text("Activer le thème sombre"),
+            title: Text(AppLocalizations.of(context)!.darkModeLabel),
+            subtitle: Text(AppLocalizations.of(context)!.darkModeSubtitle),
             value: context.watch<PreferencesProvider>().isDarkMode,
             onChanged: (value) {
               context.read<PreferencesProvider>().setDarkMode(value);
@@ -69,7 +71,7 @@ class _ParametresState extends State<Parametres> {
 
           // Statut Boursier (Radio Buttons)
           ListTile(
-            title: const Text("Statut étudiant"),
+            title: Text(AppLocalizations.of(context)!.boursierLabel),
             subtitle: Row(
               children: [
                 Radio<bool>(
@@ -79,7 +81,7 @@ class _ParametresState extends State<Parametres> {
                     context.read<PreferencesProvider>().setBoursier(value!);
                   },
                 ),
-                const Text("Boursier"),
+                Text(AppLocalizations.of(context)!.isBoursier),
                 const SizedBox(width: 20),
                 Radio<bool>(
                   value: false,
@@ -88,14 +90,14 @@ class _ParametresState extends State<Parametres> {
                     context.read<PreferencesProvider>().setBoursier(value!);
                   },
                 ),
-                const Text("Non boursier"),
+                Text(AppLocalizations.of(context)!.isNotBoursier),
               ],
             ),
           ),
           const Divider(), // barre horizontal de séparation
           // Langue (Dropdown Menu)
           ListTile(
-            title: const Text("Langue de l'application"),
+            title: Text(AppLocalizations.of(context)!.languageLabel),
             trailing: DropdownButton<String>(
               value: context.watch<PreferencesProvider>().selectedLanguage,
               items: const [
@@ -115,7 +117,7 @@ class _ParametresState extends State<Parametres> {
 
           // Couleur principale (Cercles sélectionnables)
           ListTile(
-            title: const Text("Couleur principale"),
+            title: Text(AppLocalizations.of(context)!.colorLabel),
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Wrap(

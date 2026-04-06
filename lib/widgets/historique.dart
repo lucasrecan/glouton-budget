@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/depense_provider.dart';
 import 'barre_navigation.dart';
 
@@ -9,12 +10,18 @@ class Historique extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final depenses = context.watch<DepenseProvider>().historique;
+    final theme = Theme.of(context);
     int selectedIndex = 2;
     return Scaffold(
-      appBar: AppBar(title: const Text("Historique")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.history)),
 
       body: depenses.isEmpty
-          ? const Center(child: Text("Aucune dépense pour le moment"))
+          ? Center(
+              child: Text(
+                AppLocalizations.of(context)!.noExpenses,
+                style: TextStyle(color: theme.colorScheme.onSurfaceVariant),
+              ),
+            )
           : ListView.builder(
               itemCount: depenses.length,
               itemBuilder: (context, index) {
@@ -33,7 +40,6 @@ class Historique extends StatelessWidget {
                     trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
                   ),
                 );
-
               },
             ),
       bottomNavigationBar: BarreNavigation(
