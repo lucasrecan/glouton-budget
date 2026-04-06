@@ -34,7 +34,7 @@ class DepenseProvider extends ChangeNotifier {
     required double montant,
     DateTime? date,
   }) async {
-    _historique.add(Depense(
+    _historique.insert(0, Depense(
       titre: titre,
       description: description,
       montant: montant,
@@ -43,6 +43,7 @@ class DepenseProvider extends ChangeNotifier {
     notifyListeners();
     await _saveToPrefs();
   }
+
 
   Future<void> supprimerDepense(int index) async {
     _historique.removeAt(index);
