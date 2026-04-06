@@ -21,7 +21,7 @@ class Historique extends StatelessWidget {
                 final depense = depenses[index];
 
                 return Dismissible(
-                  key: Key(depense.toString()),
+                  key: ValueKey(depense),
                   onDismissed: (_) {
                     context.read<DepenseProvider>().supprimerDepense(index);
                   },
@@ -29,10 +29,14 @@ class Historique extends StatelessWidget {
                   child: ListTile(
                     leading: const Icon(Icons.receipt),
                     title: Text(depense.titre),
-                    subtitle: Text(depense.description),
+                    subtitle: Text(
+                      "${depense.description}\n${depense.date.day}/${depense.date.month}",
+                    ),
+                    isThreeLine: depense.description.isNotEmpty,
                     trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
                   ),
                 );
+
 
               },
             ),
