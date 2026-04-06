@@ -252,10 +252,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
       bottomNavigationBar: BarreNavigation(
         selectedIndex: selectedIndex,
-        selectedItemColor: const Color(0xFF6B3FA0),
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         showUnselectedLabels: false,
-        backgroundColor: Colors.white,
         elevation: 10,
       )
     );

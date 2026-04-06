@@ -28,7 +28,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
   void _validerDepense() {
     final String titre = _titreController.text.trim();
     final String description = _descriptionController.text.trim();
-    
+
     final String montantText = _montantController.text.replaceAll(',', '.');
     final double? montant = double.tryParse(montantText);
 
@@ -42,10 +42,10 @@ class _AjouterDepenseState extends State<AjouterDepense> {
     FocusScope.of(context).unfocus();
 
     context.read<DepenseModel>().ajouterDepense(
-          titre: titre,
-          description: description,
-          montant: montant,
-        );
+      titre: titre,
+      description: description,
+      montant: montant,
+    );
 
     _titreController.clear();
     _descriptionController.clear();
@@ -60,12 +60,17 @@ class _AjouterDepenseState extends State<AjouterDepense> {
 
   @override
   Widget build(BuildContext context) {
+    // On récupère le thème actuel pour l'utiliser partout dans le build
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F0FF),
+      // Utilise la couleur de fond définie par le thème (sombre ou clair)
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: const Text("Ajouter une dépense"),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        // Utilise les couleurs du thème au lieu de blanc/noir fixe
+        backgroundColor: theme.colorScheme.surface,
+        foregroundColor: theme.colorScheme.onSurface,
         elevation: 1,
         centerTitle: false,
         actions: [
@@ -98,13 +103,15 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                         controller: _montantController,
                         keyboardType: const TextInputType.numberWithOptions(decimal: true),
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 80,
                           fontWeight: FontWeight.w400,
-                          color: Colors.black,
+                          // Le texte s'adapte à la surface (blanc sur noir, noir sur blanc)
+                          color: theme.colorScheme.onSurface,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "0,00",
+                          hintStyle: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.3)),
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
@@ -112,12 +119,12 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    const Text(
+                    Text(
                       "€",
                       style: TextStyle(
                         fontSize: 80,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                   ],
@@ -129,22 +136,24 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Titre",
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                      style: TextStyle(fontSize: 16, color: theme.colorScheme.onSurface),
                     ),
                     const SizedBox(height: 8),
                     TextField(
                       controller: _titreController,
                       textInputAction: TextInputAction.next,
+                      style: TextStyle(color: theme.colorScheme.onSurface),
                       decoration: InputDecoration(
                         hintText: "Titre",
                         filled: true,
-                        fillColor: Colors.white,
+                        // Couleur d'arrière-plan du champ adaptative
+                        fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.5),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
-                          borderSide: const BorderSide(color: Colors.black38),
+                          borderSide: BorderSide(color: theme.colorScheme.outline),
                         ),
                       ),
                     ),
@@ -157,21 +166,22 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Description :",
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                      style: TextStyle(fontSize: 16, color: theme.colorScheme.onSurface),
                     ),
                     const SizedBox(height: 8),
                     TextField(
                       controller: _descriptionController,
                       maxLines: 4,
+                      style: TextStyle(color: theme.colorScheme.onSurface),
                       decoration: InputDecoration(
                         hintText: "Mettre un description ici...",
                         filled: true,
-                        fillColor: Colors.white,
+                        fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.5),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
-                          borderSide: const BorderSide(color: Colors.black38),
+                          borderSide: BorderSide(color: theme.colorScheme.outline),
                         ),
                       ),
                     ),
@@ -188,8 +198,8 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                   icon: const Icon(Icons.add_photo_alternate_outlined),
                   label: const Text("Ajouter une image"),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    side: const BorderSide(color: Colors.black87),
+                    foregroundColor: theme.colorScheme.onSurface,
+                    side: BorderSide(color: theme.colorScheme.onSurface),
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -205,8 +215,9 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                   icon: const Icon(Icons.edit, size: 20),
                   label: const Text("Ajouter", style: TextStyle(fontSize: 18)),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6B3FA0),
-                    foregroundColor: Colors.white,
+                    // Utilise la couleur principale choisie dans les réglages
+                    backgroundColor: theme.colorScheme.primary,
+                    foregroundColor: theme.colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -221,11 +232,12 @@ class _AjouterDepenseState extends State<AjouterDepense> {
       ),
       bottomNavigationBar: BarreNavigation(
         selectedIndex: selectedIndex,
-        selectedItemColor: const Color(0xFF6B3FA0),
-        unselectedItemColor: Colors.grey,
+        // On passe les couleurs du thème à la barre de navigation
+        selectedItemColor: theme.colorScheme.primary,
+        unselectedItemColor: theme.colorScheme.onSurfaceVariant,
         showUnselectedLabels: false,
-        backgroundColor: const Color(0xFFF5F0FF),
-        elevation: 0,
+        backgroundColor: theme.colorScheme.surface,
+        elevation: 10,
       ),
     );
   }
