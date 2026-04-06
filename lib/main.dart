@@ -8,6 +8,8 @@ import 'widgets/ajoute_depense.dart';
 import 'widgets/historique.dart';
 import 'widgets/parametres.dart';
 
+enum Periode { week, month, year, all }
+
 void main() {
   runApp(
     MultiProvider(
@@ -66,7 +68,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0; // la navigation de navigation bar
-  String periode = "Cette semaine";
+  Periode periodeSelectionnee = Periode.week;
 
   void ajouterRepas() {
     final bool isBoursier = context.read<PreferencesProvider>().isBoursier;
@@ -89,14 +91,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final now = DateTime.now();
     final filtered = depenses.where((d) {
-      if (periode == "Cette semaine") {
+      if (periodeSelectionnee == Periode.week) {
         return d.date.isAfter(now.subtract(const Duration(days: 7)));
-      } else if (periode == "Ce mois") {
+      } else if (periodeSelectionnee == Periode.month) {
         return d.date.month == now.month && d.date.year == now.year;
-      } else if (periode == "Cette année") {
+      } else if (periodeSelectionnee == Periode.year) {
         return d.date.year == now.year;
       }
-      return true; // "Tout"
+      return true; // Periode.all
     }).toList();
 
     double totalCalcule = filtered.fold(0, (sum, d) => sum + d.montant);
@@ -164,6 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ],
+
+
           ),
         ),
 
@@ -174,46 +178,53 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // TOTAL (utilise Provider)
-                Text(
-                  "${totalCalcule.toStringAsFixed(2)} €",
-                  style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).colorScheme.onSurface,
+                GestureDetector(
+                  onLongPress: () async {
+                    await context.read<DepenseProvider>().remplirDonneesTest();
+                  },
+                  child: Text(
+                    "${totalCalcule.toStringAsFixed(2)} €",
+                    style: TextStyle(
+                      fontSize: 48,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                   ),
                 ),
+
 
                 const SizedBox(height: 20),
 
                 // DROPDOWN
-                DropdownButton<String>(
-                  value: periode,
+                DropdownButton<Periode>(
+                  value: periodeSelectionnee,
                   underline: Container(),
                   style: const TextStyle(color: Colors.black, fontSize: 16),
                   items: [
                     DropdownMenuItem(
-                      value: "Cette semaine",
+                      value: Periode.week,
                       child: Text(AppLocalizations.of(context)!.thisWeek),
                     ),
                     DropdownMenuItem(
-                        value: "Ce mois",
+                        value: Periode.month,
                         child: Text(AppLocalizations.of(context)!.thisMonth)
                     ),
                     DropdownMenuItem(
-                      value: "Cette année",
+                      value: Periode.year,
                       child: Text(AppLocalizations.of(context)!.thisYear),
                     ),
                     DropdownMenuItem(
-                        value: "Tout",
+                        value: Periode.all,
                         child: Text(AppLocalizations.of(context)!.all)
                     ),
                   ],
                   onChanged: (value) {
                     setState(() {
-                      periode = value!;
+                      periodeSelectionnee = value!;
                     });
                   },
                 ),
+
 
                 const SizedBox(height: 30),
 
