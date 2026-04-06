@@ -33,7 +33,6 @@ class Historique extends StatelessWidget {
               key: Key(depense.id),
               direction: DismissDirection.endToStart,
               onDismissed: (_) {
-                // On appelle la nouvelle méthode par ID
                 context.read<DepenseProvider>().supprimerDepenseParId(depense.id);
               },
               background: Container(

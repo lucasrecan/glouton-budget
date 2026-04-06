@@ -7,7 +7,6 @@ class DepenseProvider extends ChangeNotifier {
   List<Depense> _historique = [];
 
   List<Depense> get historique {
-    // On crée une copie pour ne pas modifier la liste originale pendant le tri
     List<Depense> triee = List.from(_historique);
     // Tri du plus récent au plus ancien
     triee.sort((a, b) => b.date.compareTo(a.date));

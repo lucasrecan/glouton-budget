@@ -5,15 +5,6 @@ import '../l10n/app_localizations.dart';
 import '../models/preferences_provider.dart';
 import 'barre_navigation.dart';
 
-/*
-Paramètres intéressants :
-- boursier/pas boursier
-- mode sombre/clair
-- couleur global de l'application ?
-- langue de l'application (ne pas nécessiter un reload de l'app ?)
-
- */
-
 class Parametres extends StatefulWidget {
   const Parametres({super.key});
 

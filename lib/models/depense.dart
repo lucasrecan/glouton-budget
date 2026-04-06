@@ -1,5 +1,5 @@
 class Depense {
-  final String id; // Nouvel ID unique
+  final String id;
   final String titre;
   final String description;
   final double montant;
