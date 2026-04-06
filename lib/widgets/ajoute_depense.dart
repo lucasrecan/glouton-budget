@@ -55,7 +55,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
       const SnackBar(content: Text("Dépense ajoutée avec succès !")),
     );
 
-    Navigator.pop(context);
+    // Navigator.pop(context);
   }
 
   @override
