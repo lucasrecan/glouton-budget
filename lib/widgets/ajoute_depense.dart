@@ -184,7 +184,7 @@ class _AjouterDepenseState extends State<AjouterDepense> {
 
                 const SizedBox(height: 30),
 
-                // IMAGE BUTTON
+                /*// IMAGE BUTTON
                 OutlinedButton.icon(
                   onPressed: () {
                     // TODO: Implémenter
@@ -199,14 +199,14 @@ class _AjouterDepenseState extends State<AjouterDepense> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                ),
+                ),*/
 
                 const SizedBox(height: 30),
 
                 // AJOUTER BUTTON
                 ElevatedButton.icon(
                   onPressed: _validerDepense,
-                  icon: const Icon(Icons.edit, size: 20),
+                  icon: const Icon(Icons.add_circle_outline, size: 20),
                   label: Text(AppLocalizations.of(context)!.addBtn, style: const TextStyle(fontSize: 18)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: theme.colorScheme.primary,
