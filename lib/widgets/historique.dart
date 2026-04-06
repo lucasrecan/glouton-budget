@@ -9,7 +9,7 @@ class Historique extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final depenses = context.watch<DepenseProvider>().historique;
+    final depenses = context.watch<DepenseProvider>().historique.reversed.toList();;
     final theme = Theme.of(context);
     int selectedIndex = 2;
     return Scaffold(
