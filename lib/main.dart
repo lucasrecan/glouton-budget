@@ -96,11 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.purple),
+            DrawerHeader(
+              decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary,),
               child: Text(
                 "Menu",
-                style: TextStyle(color: Colors.white, fontSize: 24),
+                style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 24),
               ),
             ),
 
@@ -200,8 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF6B3FA0),
-                      foregroundColor: Colors.white,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 30,
                         vertical: 12,
