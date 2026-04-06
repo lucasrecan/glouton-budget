@@ -20,12 +20,20 @@ class Historique extends StatelessWidget {
               itemBuilder: (context, index) {
                 final depense = depenses[index];
 
-                return ListTile(
-                  leading: const Icon(Icons.receipt),
-                  title: Text(depense.titre),
-                  subtitle: Text(depense.description),
-                  trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
+                return Dismissible(
+                  key: Key(depense.toString()),
+                  onDismissed: (_) {
+                    context.read<DepenseModel>().supprimerDepense(index);
+                  },
+                  background: Container(color: Colors.red),
+                  child: ListTile(
+                    leading: const Icon(Icons.receipt),
+                    title: Text(depense.titre),
+                    subtitle: Text(depense.description),
+                    trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
+                  ),
                 );
+
               },
             ),
       bottomNavigationBar: BarreNavigation(
