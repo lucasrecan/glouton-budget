@@ -30,7 +30,7 @@ class Historique extends StatelessWidget {
                     leading: const Icon(Icons.receipt),
                     title: Text(depense.titre),
                     subtitle: Text(
-                      "${depense.description}\n${depense.date.day}/${depense.date.month}",
+                      "${depense.description}\n${depense.date.day}/${depense.date.month}/${depense.date.year}",
                     ),
                     isThreeLine: depense.description.isNotEmpty,
                     trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
