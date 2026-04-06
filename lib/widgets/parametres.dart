@@ -69,7 +69,7 @@ class _ParametresState extends State<Parametres> {
           ),
           const Divider(),
 
-          // Statut Boursier (Radio Buttons)
+          // Statut Boursier (Radio buttons)
           ListTile(
             title: Text(AppLocalizations.of(context)!.boursierLabel),
             subtitle: Row(
@@ -95,7 +95,7 @@ class _ParametresState extends State<Parametres> {
             ),
           ),
           const Divider(), // barre horizontal de séparation
-          // Langue (Dropdown Menu)
+          // Langue (Dropdown menu)
           ListTile(
             title: Text(AppLocalizations.of(context)!.languageLabel),
             trailing: DropdownButton<String>(
@@ -151,15 +151,6 @@ class _ParametresState extends State<Parametres> {
               ),
             ),
           ),
-          // const SizedBox(height: 30),
-          // ElevatedButton.icon(
-          //   onPressed: _savePreferences,
-          //   icon: const Icon(Icons.save),
-          //   label: const Text("Enregistrer les modifications"),
-          //   style: ElevatedButton.styleFrom(
-          //     minimumSize: const Size.fromHeight(50), // Bouton large
-          //   ),
-          // ),
         ],
       ),
       bottomNavigationBar: BarreNavigation(
