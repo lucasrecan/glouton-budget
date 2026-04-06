@@ -25,14 +25,22 @@ class Historique extends StatelessWidget {
           : ListView.builder(
               itemCount: depenses.length,
               itemBuilder: (context, index) {
-                final depense = depenses[index];
+                // On inverse l'index pour afficher la dépense la plus récente en haut
+                final reversedIndex = depenses.length - 1 - index;
+                final depense = depenses[reversedIndex];
 
                 return Dismissible(
                   key: ValueKey(depense),
                   onDismissed: (_) {
-                    context.read<DepenseProvider>().supprimerDepense(index);
+                    // Supprimer à l'index réel de la liste chronologique
+                    context.read<DepenseProvider>().supprimerDepense(reversedIndex);
                   },
-                  background: Container(color: Colors.red),
+                  background: Container(
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
                   child: ListTile(
                     leading: const Icon(Icons.receipt),
                     title: Text(depense.titre),
@@ -40,12 +48,15 @@ class Historique extends StatelessWidget {
                       "${depense.description}\n${depense.date.day}/${depense.date.month}/${depense.date.year}",
                     ),
                     isThreeLine: depense.description.isNotEmpty,
-                    trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
+                    trailing: Text(
+                      "${depense.montant.toStringAsFixed(2)} €",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 );
-
               },
             ),
+
       bottomNavigationBar: BarreNavigation(
         selectedIndex: selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.primary,
