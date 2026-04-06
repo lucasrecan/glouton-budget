@@ -35,11 +35,13 @@ class DepenseProvider extends ChangeNotifier {
     DateTime? date,
   }) async {
     _historique.add(Depense(
+      id: DateTime.now().microsecondsSinceEpoch.toString(),
       titre: titre,
       description: description,
       montant: montant,
       date: date ?? DateTime.now(),
     ));
+
     notifyListeners();
     await _saveToPrefs();
   }
@@ -58,35 +60,43 @@ class DepenseProvider extends ChangeNotifier {
 
     // Dépense de l'an dernier (il y a 100 jours ou plus)
     _historique.add(Depense(
+      id: "test_1",
       titre: "Cadeau Noël",
       description: "Achat (année dernière)",
       montant: 25.0,
       date: DateTime(now.year - 1, 12, 25),
     ));
 
+
     // Dépense du mois dernier (il y a 20 jours)
     _historique.add(Depense(
+      id: "test_2",
       titre: "Cinéma",
       description: "Sortie amis (mois dernier)",
       montant: 12.0,
       date: now.subtract(const Duration(days: 20)),
     ));
 
+
     // Dépense de la semaine dernière (il y a 5 jours)
     _historique.add(Depense(
+      id: "test_3",
       titre: "Courses",
       description: "Supermarché (semaine dernière)",
       montant: 45.50,
       date: now.subtract(const Duration(days: 5)),
     ));
 
+
     // Dépense d'aujourd'hui
     _historique.add(Depense(
+      id: "test_4",
       titre: "Repas",
       description: "Déjeuner CROUS (aujourd'hui)",
       montant: 1.0,
       date: now,
     ));
+
 
     notifyListeners();
     await _saveToPrefs();

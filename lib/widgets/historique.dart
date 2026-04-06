@@ -30,8 +30,9 @@ class Historique extends StatelessWidget {
                 final depense = depenses[reversedIndex];
 
                 return Dismissible(
-                  key: ValueKey(depense),
+                  key: ValueKey(depense.id),
                   onDismissed: (_) {
+
                     // Supprimer à l'index réel de la liste chronologique
                     context.read<DepenseProvider>().supprimerDepense(reversedIndex);
                   },
