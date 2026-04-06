@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String periode = "Cette semaine";
 
   void ajouterRepas() {
-    final bool isBoursier = context.watch<PreferencesProvider>().isBoursier;
+    final bool isBoursier = context.read<PreferencesProvider>().isBoursier;
     double prix = isBoursier ? 1.0 : 3.30;
 
     context.read<DepenseModel>().ajouterDepense(
