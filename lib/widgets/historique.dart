@@ -17,46 +17,35 @@ class Historique extends StatelessWidget {
 
       body: depenses.isEmpty
           ? Center(
-              child: Text(
-                AppLocalizations.of(context)!.noExpenses,
-                style: TextStyle(color: theme.colorScheme.onSurfaceVariant),
-              ),
-            )
+        child: Text(
+          AppLocalizations.of(context)!.noExpenses,
+          style: TextStyle(color: theme.colorScheme.onSurfaceVariant),
+        ),
+      )
           : ListView.builder(
-              itemCount: depenses.length,
-              itemBuilder: (context, index) {
-                // On inverse l'index pour afficher la dépense la plus récente en haut
-                final reversedIndex = depenses.length - 1 - index;
-                final depense = depenses[reversedIndex];
+        itemCount: depenses.length,
+        itemBuilder: (context, index) {
+          final depense = depenses[index];
 
-                return Dismissible(
-                  key: ValueKey(depense),
-                  onDismissed: (_) {
-                    // Supprimer à l'index réel de la liste chronologique
-                    context.read<DepenseProvider>().supprimerDepense(reversedIndex);
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  ),
-                  child: ListTile(
-                    leading: const Icon(Icons.receipt),
-                    title: Text(depense.titre),
-                    subtitle: Text(
-                      "${depense.description}\n${depense.date.day}/${depense.date.month}/${depense.date.year}",
-                    ),
-                    isThreeLine: depense.description.isNotEmpty,
-                    trailing: Text(
-                      "${depense.montant.toStringAsFixed(2)} €",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                );
-              },
+          return Dismissible(
+            key: ValueKey(depense),
+            onDismissed: (_) {
+              context.read<DepenseProvider>().supprimerDepense(index);
+            },
+            background: Container(color: Colors.red),
+            child: ListTile(
+              leading: const Icon(Icons.receipt),
+              title: Text(depense.titre),
+              subtitle: Text(
+                "${depense.description}\n${depense.date.day}/${depense.date.month}/${depense.date.year}",
+              ),
+              isThreeLine: depense.description.isNotEmpty,
+              trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
             ),
+          );
 
+        },
+      ),
       bottomNavigationBar: BarreNavigation(
         selectedIndex: selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.primary,
