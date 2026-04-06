@@ -9,7 +9,7 @@ class Historique extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final depenses = context.watch<DepenseProvider>().historique.reversed.toList();;
+    final depenses = context.watch<DepenseProvider>().historique;
     final theme = Theme.of(context);
     int selectedIndex = 2;
     return Scaffold(
@@ -24,25 +24,35 @@ class Historique extends StatelessWidget {
       )
           : ListView.builder(
         itemCount: depenses.length,
-        itemBuilder: (context, index) {
-          final depense = depenses[index];
+          // Dans ton ListView.builder
+          itemBuilder: (context, index) {
+            final depense = depenses[index];
 
-          return Dismissible(
-            key: ValueKey(depense),
-            onDismissed: (_) {
-              context.read<DepenseProvider>().supprimerDepense(index);
-            },
-            background: Container(color: Colors.red),
-            child: ListTile(
-              leading: const Icon(Icons.receipt),
-              title: Text(depense.titre),
-              subtitle: Text(
-                "${depense.description}\n${depense.date.day}/${depense.date.month}/${depense.date.year}",
+            return Dismissible(
+              // Utilise l'ID pour la clé, c'est unique et stable
+              key: Key(depense.id),
+              direction: DismissDirection.endToStart,
+              onDismissed: (_) {
+                // On appelle la nouvelle méthode par ID
+                context.read<DepenseProvider>().supprimerDepenseParId(depense.id);
+              },
+              background: Container(
+                color: Colors.red,
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.only(right: 20),
+                child: const Icon(Icons.delete, color: Colors.white),
               ),
-              isThreeLine: depense.description.isNotEmpty,
-              trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
-            ),
-          );
+              child: ListTile(
+                leading: const Icon(Icons.receipt),
+                title: Text(depense.titre),
+                subtitle: Text(
+                  "${depense.description}\n${depense.date.day}/${depense.date.month}/${depense.date.year}",
+                ),
+                isThreeLine: depense.description.isNotEmpty,
+                trailing: Text("${depense.montant.toStringAsFixed(2)} €"),
+              ),
+            );
+
 
         },
       ),
