@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_projet_equipen/widgets/barre_navigation.dart';
 import 'package:provider/provider.dart';
+import 'l10n/app_localizations.dart';
 import 'models/depense_model.dart';
 import 'models/preferences_provider.dart';
 import 'widgets/ajoute_depense.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         .selectedColor;
     return MaterialApp(
       title: 'Glouton Budget',
+      locale: Locale(context.watch<PreferencesProvider>().selectedLanguage), // Langue dynamique
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -211,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     onPressed: ajouterRepas,
-                    child: const Text("Ajouter un repas"),
+                    child: Text(AppLocalizations.of(context)!.addMeal),
                   ),
 
                   IconButton(
