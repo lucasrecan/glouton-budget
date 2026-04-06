@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 DropdownButton<String>(
                   value: periode,
                   underline: Container(),
-                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 16),
                   items: [
                     DropdownMenuItem(
                       value: "Cette semaine",
