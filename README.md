@@ -1,19 +1,4 @@
-# Mini-Projet Flutter
-*Projet réalisé dans le cadre du module R4.A.11.*
-
-> **IMPORTANT :** Merci de remplir la fiche d'identification ci-dessous sans modifier les libellés de la colonne "Donnée".
-> **NE PAS MODIFIER** la structure du tableau au-dessus de la ligne de séparation.
-> Renseignez vos informations manuellement à la place des textes entre crochets `[...]`.
-
-## 📋 Fiche d'identification
-
-| Donnée              | Valeur           |
-|:--------------------|:-----------------|
-| **Application**     | [Glouton Budget] |
-| **Numéro d'équipe** | [10]             |
-| **Identifiant 1**   | [shn4606a]       |
-| **Identifiant 2**   | [rcl4463a]       |
-
+# Glouton Budget
 
 ---
 
@@ -45,8 +30,8 @@ Glouton Budget est une application permettant aux étudiants de suivre facilemen
 ### ⚙️ Informations techniques
 
 * Application développée avec **Flutter** et **Dart**.
-* Gestion de l’état avec **Provider**.
-* Sauvegarde des données (dépenses et préférences) avec **SharedPreferences**.
+* Gestion de l’état avec un **Provider**.
+* Sauvegarde des données (dépenses et préférences) avec les **SharedPreferences**.
 * Aucune connexion internet n’est requise.
 
 ---
@@ -55,13 +40,31 @@ Glouton Budget est une application permettant aux étudiants de suivre facilemen
 
 * Ajouter une dépense via le bouton **"Ajouter"** ou **"Ajouter un repas"**.
 * Consulter les dépenses dans l’onglet **Historique**.
-* Supprimer une dépense en effectuant un **glissement (swipe)**.
-* Modifier les paramètres (thème, statut boursier) dans l’onglet **Paramètres**.
+* Supprimer une dépense dans l'historique en effectuant un **glissement (swipe)**.
+* Modifier les paramètres (thème, statut boursier...) dans l’onglet **Paramètres**.
 
 ---
 
-### 🔐 Comptes de test
+## Démonstration des pages
 
-* Aucun compte ou authentification n’est nécessaire pour utiliser l’application.
+Accueil : 
+
+<img width="200" height="424" alt="accueil" src="https://github.com/user-attachments/assets/d105bf80-a35c-4e03-8c92-dcc387e09543" />
+
+
+Ajout d'une dépense : 
+
+<img width="203" height="424" alt="ajout_dépense" src="https://github.com/user-attachments/assets/6b54a681-12f7-48ec-9cb4-43a193caefc2" />
+
+
+Historique des dépenses : 
+
+<img width="200" height="420" alt="historique" src="https://github.com/user-attachments/assets/471dc66f-1715-479e-83c2-a7efb113d6c5" />
+
+
+Paramètres : 
+
+<img width="200" height="425" alt="paramètres" src="https://github.com/user-attachments/assets/b3a9c628-cb94-4c58-a8bd-4c7770423469" />
+
 
 
